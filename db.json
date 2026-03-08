@@ -1,8 +1,4 @@
-<script setup>
-
-import { ref, computed } from "vue";
-import Navbar from "./components/Navbar.vue"
-const products = ref([
+{"products":[
   {
     "id": 1,
     "name": "Cozy Sneakers",
@@ -12,7 +8,11 @@ const products = ref([
     "price": 120,
     "discount": 20,
     "stock": 10,
-    "tags": ["Fashion", "Casual", "Sport"]
+    "tags": [
+      "Fashion",
+      "Casual",
+      "Sport"
+    ]
   },
   {
     "id": 2,
@@ -23,7 +23,10 @@ const products = ref([
     "price": 90,
     "discount": 10,
     "stock": 5,
-    "tags": ["Sport", "Running"]
+    "tags": [
+      "Sport",
+      "Running"
+    ]
   },
   {
     "id": 3,
@@ -34,7 +37,10 @@ const products = ref([
     "price": 150,
     "discount": 0,
     "stock": 8,
-    "tags": ["Casual", "Winter"]
+    "tags": [
+      "Casual",
+      "Winter"
+    ]
   },
   {
     "id": 4,
@@ -45,35 +51,9 @@ const products = ref([
     "price": 30,
     "discount": 50,
     "stock": 20,
-    "tags": ["Summer", "Casual"]
-  }
-]
-);
-
-function buyProduct(id)
-{
-  const product = products.value.find(product => product.id == id);
-  if(product && product.stock > 0)
-  {
-    product.stock--;
-  }
-
+    "tags": [
+      "Summer",
+      "Casual"
+    ]
+  }]
 }
-const totalStock = computed(()=>{
-  return products.value.reduce((sum,p)=> sum + p.stock ,0)
-})
-</script>
-
-<template>
-
-<div class="min-h-screen">
-  <Navbar :totalStock="totalStock" />
-  <main class="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
-    <router-view
-      :products="products"
-      @buy="buyProduct"
-    />
-  </main>
-</div>
-
-</template>

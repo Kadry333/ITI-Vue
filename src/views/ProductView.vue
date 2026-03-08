@@ -9,6 +9,11 @@ const props = defineProps({
   products:Array
 })
 
+const emit = defineEmits(["buy"])
+
+function buy(id){
+  emit("buy", id)
+}
 const route = useRoute()
 
 const product = computed(()=>{
@@ -23,26 +28,26 @@ const related = computed(()=>{
 
 <template>
 
-<div class="max-w-6xl mx-auto px-6">
+<div>
 
   <ProductDetails
     :product="product"
-    @buy="$emit('buy',$event)"
+    @buy = "buy"
   />
 
-  <h2 class="text-xl font-bold mt-10 mb-6">
-    Related Products
-  </h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-    <ProductCard
-      v-for="p in related"
-      :key="p.id"
-      :product="p"
-    />
-
-  </div>
+  <section class="mt-10">
+    <div class="flex items-end justify-between mb-5">
+      <h2 class="text-xl md:text-2xl font-bold text-slate-900">Related Products</h2>
+      <span class="text-sm text-slate-500">{{ related.length }} options</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <ProductCard
+        v-for="p in related"
+        :key="p.id"
+        :product="p"
+      />
+    </div>
+  </section>
 
 </div>
 
